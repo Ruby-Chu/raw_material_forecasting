@@ -2,7 +2,7 @@ from prophet import Prophet
 
 
 def predict(dataset, holidays=None, future_week_length=26, freq="W-MON", yearly_seasonality=True,
-            weekly_seasonality=True, daily_seasonality=False):
+            weekly_seasonality=True, daily_seasonality=False, include_history=False):
     model = Prophet(
         seasonality_mode='multiplicative',
         yearly_seasonality=yearly_seasonality,
@@ -14,7 +14,8 @@ def predict(dataset, holidays=None, future_week_length=26, freq="W-MON", yearly_
 
     # 預測歷史資料
     # future_dataframe = model.make_future_dataframe(periods=future_week_length, freq=freq, include_history=True)
-    future_dataframe = model.make_future_dataframe(periods=future_week_length, freq=freq, include_history=False)
+    # future_dataframe = model.make_future_dataframe(periods=future_week_length, freq=freq, include_history=False)
+    future_dataframe = model.make_future_dataframe(periods=future_week_length, freq=freq, include_history=include_history)
     result = model.predict(future_dataframe)
 
     info = result.loc[:, ["ds", "yhat", "yhat_lower", "yhat_upper"]]
