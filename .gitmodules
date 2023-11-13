@@ -1,0 +1,3 @@
+[submodule "raw_material_crawler"]
+	path = raw_material_crawler
+	url = https://github.com/Ruby-Chu/raw_material_crawler.git
