@@ -1,3 +1,2 @@
-prophet
-workalendar
-holidays==0.24
+scikit-learn
+numpy==1.20.3
