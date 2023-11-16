@@ -2,6 +2,9 @@
 
 ``` mermaid
 flowchart LR;
-	1[載入資料] --> 2[資料轉換] --> 3[資料切割] --> 4[feature normalization] --> 5[訓練模型與評估] --> 6[prediction] --> 7[繪製實際及預測資料的圖形] --> 8[效能評估RMSE/MAPE];
-	5[訓練模型與評估] --測試驗證參數--> 3[資料切割];
+    1[load data] --> 2[transform] --> 3[split] --> 4[feature normalization] --> 5[train model and evaluate] --> 6[prediction] --> 7[plot] & 8[RMSE/MAPE];
+    5[train model and evaluate] --check--> 3[split];
 ```
+
+## 黃金預測結果(Example)
+![image info](./image/gold.png)
