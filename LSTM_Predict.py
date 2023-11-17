@@ -30,7 +30,7 @@ def create_dateset(dataset, look_back=1):
 
 if __name__ == "__main__":
     infos = []
-    filename = '黃金行情走勢(美元-盎司)'
+    filename = '廢鋼-豐興(元-噸)'
     # get information
     with open("json/{}.json".format(filename)) as fid:
         data = json.load(fid)
@@ -63,12 +63,11 @@ if __name__ == "__main__":
     test = dataset[train_size:len(dataset), :]
 
     # 以前前資料為x，當期資料為Y
-    # look_back = 1
-    look_back = 3
+    look_back = 1
     trainX, trainY = create_dateset(train, look_back)
     testX, testY = create_dateset(test, look_back)
 
-    # [number、1、dim]
+    # [筆數、落後期數、dim]
     trainX = np.reshape(trainX, (trainX.shape[0], 1, trainX.shape[1]))
     testX = np.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
 
@@ -91,9 +90,11 @@ if __name__ == "__main__":
 
     # 計算 RMSE
     trainScore = math.sqrt(mean_squared_error(trainY, trainPredict[:, 0]))
-    print('Train Score: %.2f RMSE' % trainScore)
+    s1 = 'Train Score: %.2f RMSE' % trainScore
+    print(s1)
     testScore = math.sqrt(mean_squared_error(testY, testPredict[:, 0]))
-    print('Test Score: %.2f RMSE' % testScore)
+    s2 = 'Test Score: %.2f RMSE' % testScore
+    print(s2)
 
     # 訓練資料的X/Y
     trainPredictPlot = np.empty_like(dataset)
@@ -112,10 +113,12 @@ if __name__ == "__main__":
     # plt.show()
     plt.legend()
     plt.grid(True)
-    plt.title(filename)  # title
-    plt.ylabel("價格(美元/盎司)")  # y label
+    plt.title("{},{},{}".format(filename, s1, s2))  # title
+    plt.ylabel("廢鋼-豐興(元/噸)")  # y label
 
     if not os.path.exists('image'):
         os.mkdir('image')
-    plt.savefig('image/gold.png')
+    # gold, steel, scrap_steel
+    plt.savefig('image/scrap_steel.png')
+
     plt.close()
